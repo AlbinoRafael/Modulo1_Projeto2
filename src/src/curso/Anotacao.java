@@ -1,6 +1,7 @@
 package curso;
 
 import empresa.Trabalhador;
+import utils.Validacoes;
 
 public class Anotacao {
 
@@ -14,7 +15,7 @@ public class Anotacao {
         this.id_Anotacao = cont_id;
         this.trabalhador = trabalhador;
         this.modulo = modulo;
-        if(validaAnotacao(anotacao)){this.anotacao = anotacao;}else{throw new IllegalArgumentException("Anotação inválida!");}
+        if(Validacoes.validaString(anotacao)){this.anotacao = anotacao;}else{throw new IllegalArgumentException("Anotação inválida!");}
         cont_id++;
     }
 
@@ -27,14 +28,11 @@ public class Anotacao {
     public String getAnotacao() {return anotacao;}
 
     public void setAnotacao(String anotacao){
-        if(validaAnotacao(anotacao)) {
+        if(Validacoes.validaString(anotacao)) {
             this.anotacao = anotacao;
         }else{
             throw new IllegalArgumentException("Anotação inválida");
         }
     }
 
-    private boolean validaAnotacao(String anotacao){
-        return !anotacao.isBlank()&&!anotacao.isEmpty()&&anotacao!=null;
-    }
 }

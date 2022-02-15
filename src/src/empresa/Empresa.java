@@ -3,7 +3,7 @@ package empresa;
 import curso.Trilha;
 import empresa.enumsempresa.EnumRegional;
 import empresa.enumsempresa.EnumSegmento;
-import utils.ValidaCPFeCNPJ;
+import utils.Validacoes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,19 +23,24 @@ public class Empresa {
     private String estado;
     private EnumRegional regional;
 
-    public Empresa(String nome, String cnpj, String cidade, String estado, EnumRegional regional, boolean eMatriz, EnumSegmento segmento) {
-        this.id_Empresa=cont_id;
-        if (validaNome(nome)) {
-            this.nome = nome;
+    public Empresa(String nome, String nomeFilial, String cnpj, String cidade, String estado, EnumRegional regional, boolean eMatriz, EnumSegmento segmento) {
+        this.id_Empresa = cont_id;
+
+        if (Validacoes.validaString(nome)) {
+            if (eMatriz) {
+                this.nome = nome;
+            } else {
+                this.nomeFilial = nomeFilial;
+            }
         } else {
             throw new IllegalArgumentException("Nome inválido");
         }
-        if (ValidaCPFeCNPJ.validarCNPJ(cnpj)) {
+        if (Validacoes.validarCNPJ(cnpj)) {
             this.cnpj = cnpj;
         } else {
             throw new IllegalArgumentException("CNPJ inválido");
         }
-        if (validaCidade(cidade)) {
+        if (Validacoes.validaString(cidade)) {
             this.cidade = cidade;
         } else {
             throw new IllegalArgumentException("Cidade inválido");
@@ -51,7 +56,7 @@ public class Empresa {
         cont_id++;
     }
 
-    public int getId_Empresa(){
+    public int getId_Empresa() {
         return this.id_Empresa;
     }
 
@@ -91,15 +96,41 @@ public class Empresa {
         return regional;
     }
 
-    private boolean validaNome(String nome) {
-        return !nome.isEmpty() && !nome.isBlank() && nome != null;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    private boolean validaCidade(String cidade) {
-        return !cidade.isEmpty() && !cidade.isBlank() && cidade != null;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public void seteMatriz(boolean eMatriz) {
+        this.eMatriz = eMatriz;
+    }
+
+    public void setNomeFilial(String nomeFilial) {
+        this.nomeFilial = nomeFilial;
+    }
+
+    public void setSegmento(EnumSegmento segmento) {
+        this.segmento = segmento;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setRegional(EnumRegional regional) {
+        this.regional = regional;
     }
 
     private boolean validaEstado(String estado) {
-        return !estado.isEmpty() && !cidade.isBlank() && nome != null && estado.length() == 2;
+        return Validacoes.validaString(estado) && estado.length() == 2;
     }
+
+
 }

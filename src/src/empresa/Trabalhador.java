@@ -4,6 +4,7 @@ import curso.Anotacao;
 import curso.Avaliacao;
 import curso.Modulo;
 import curso.Trilha;
+import utils.Validacoes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,11 +30,11 @@ public class Trabalhador {
     public Trabalhador(String nome, String cpf, Empresa empresa, String setor,
                        String funcao, LocalDate ultimaAlteracaoFuncao) {
         this.id_Trabalhador = cont_id;
-        this.nome = nome;
-        this.cpf = cpf;
+        if(Validacoes.validaString(nome)){this.nome = nome;}else{throw new IllegalArgumentException("Nome inválido");}
+        if(Validacoes.validarCPF(cpf)){this.cpf = cpf;}else{throw new IllegalArgumentException("CPF inválido");}
         this.empresa = empresa;
-        this.setor = setor;
-        this.funcao = funcao;
+        if(Validacoes.validaString(setor)){this.setor = setor;}else{throw new IllegalArgumentException("Setor inválido");}
+        if(Validacoes.validaString(funcao)){this.funcao = funcao;}else{throw new IllegalArgumentException("Função inválida");}
         this.ultimaAlteracaoFuncao = ultimaAlteracaoFuncao;
         cont_id++;
     }
@@ -89,4 +90,5 @@ public class Trabalhador {
     public void setFuncao(String funcao) {
         this.funcao = funcao;
     }
+
 }

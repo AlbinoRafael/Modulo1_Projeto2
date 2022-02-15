@@ -9,27 +9,35 @@ public class Avaliacao {
     private Modulo modulo;
     private double nota;
 
-    public Avaliacao(Trabalhador trabalhador, Modulo modulo,double nota){
+    public Avaliacao(Trabalhador trabalhador, Modulo modulo, double nota) {
         this.id_Avaliacao = cont_id;
         this.trabalhador = trabalhador;
         this.modulo = modulo;
-        if(validaNota(nota)){this.nota = nota;}else{throw new IllegalArgumentException("Nota inválida!");}
+        if (validaNota(nota)) {
+            this.nota = nota;
+        } else {
+            throw new IllegalArgumentException("Nota inválida!");
+        }
         cont_id++;
     }
-    public int getId_Avaliacao(){
+
+    public int getId_Avaliacao() {
         return this.id_Avaliacao;
     }
 
-    public Trabalhador getTrabalhador(){
+    public Trabalhador getTrabalhador() {
         return this.trabalhador;
     }
-    public Modulo getModulo(){
+
+    public Modulo getModulo() {
         return this.modulo;
     }
-    public double nota(){
+
+    public double nota() {
         return this.nota;
     }
-    private boolean validaNota(double nota){
-        return nota>=0 && nota<1000;
+
+    private boolean validaNota(double nota) {
+        return nota >= 0 && nota < 1000;
     }
 }

@@ -2,6 +2,7 @@ package curso;
 
 import curso.enumscurso.EnumSatisfacao;
 import empresa.Empresa;
+import utils.Validacoes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +22,11 @@ public class Trilha {
 
     public Trilha(Empresa empresa, String ocupacao) {
         this.empresa = empresa;
-        if(validaOcupacao(ocupacao)){this.ocupacao = ocupacao;}else{throw new IllegalArgumentException("Ocupação inválida!");}
+        if (Validacoes.validaString(ocupacao)) {
+            this.ocupacao = ocupacao;
+        } else {
+            throw new IllegalArgumentException("Ocupação inválida!");
+        }
         this.id = contador();
         this.nome = setNome();
         this.apelido = setApelido();
@@ -74,23 +79,19 @@ public class Trilha {
     }
 
     private String setApelido() {
-        return (ocupacao+id).replace(" ", "");
+        return (ocupacao + id).replace(" ", "");
     }
 
     public EnumSatisfacao getSatisfacao() {
         return satisfacao;
     }
 
-    public void setSatisfacao(EnumSatisfacao satisfacao){
+    public void setSatisfacao(EnumSatisfacao satisfacao) {
         this.satisfacao = satisfacao;
     }
 
     public Anotacao getAnotacao() {
         return anotacao;
-    }
-
-    private boolean validaOcupacao(String ocupacao){
-        return !ocupacao.isBlank()&&!ocupacao.isEmpty()&&ocupacao!=null;
     }
 
     private int contador() {

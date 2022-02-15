@@ -1,4 +1,6 @@
+import curso.Modulo;
 import curso.Trilha;
+import curso.enumscurso.EnumStatus;
 import empresa.Empresa;
 import empresa.enumsempresa.EnumRegional;
 import empresa.enumsempresa.EnumSegmento;
@@ -15,7 +17,7 @@ public class TESTE {
         //}catch (IllegalArgumentException e){
         //    System.err.println(e.getMessage());
         //}
-        Empresa empresa = new Empresa("Senai","00.000.000/0000-00","Tubarão","SC",
+        Empresa empresa = new Empresa("Senai","","00.000.000/0000-00","Tubarão","SC",
                 EnumRegional.SUL, true, EnumSegmento.IND_DIVERSA);
         Trilha trilha = new Trilha(empresa,"Pedreiro");
         empresa.adicionaTrilha(trilha);
@@ -25,6 +27,10 @@ public class TESTE {
         empresa.adicionaTrilha(trilha3);
         Trilha trilha4 = new Trilha(empresa,"Engenheiro");
         empresa.adicionaTrilha(trilha4);
-        empresa.getTrilhas().stream().forEach(t->System.out.println(t.getApelido()));
+        Modulo modulo = new Modulo(trilha,"Java","desenvolvimento com a linguagem java",
+                "projeto biblioteca",10);
+        empresa.getTrilhas().get(0).adicionaModulo(modulo);
+        empresa.getTrilhas().stream().forEach(t->System.out.println(t.getNome()));
+        empresa.getTrilhas().get(0).getModulos().stream().forEach(m->System.out.println(m.getNome()));
     }
 }

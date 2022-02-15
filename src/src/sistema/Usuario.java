@@ -1,7 +1,8 @@
 package sistema;
 
-import utils.ValidaCPFeCNPJ;
+import utils.Validacoes;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,12 +19,12 @@ public class Usuario {
 
     public Usuario(String nome, String cpf, String email, String senha) {
         this.id_Usuario = cont_id;
-        if (validaNome(nome)) {
+        if (Validacoes.validaString(nome)) {
             this.nome = nome;
         } else {
             throw new IllegalArgumentException("Nome inválido");
         }
-        if (ValidaCPFeCNPJ.validarCPF(cpf)) {
+        if (Validacoes.validarCPF(cpf)) {
             this.cpf = cpf;
         } else {
             throw new IllegalArgumentException("CPF inválido");
@@ -42,7 +43,7 @@ public class Usuario {
     }
 
     public Set<EnumPerfilAcesso> getPerfisAcesso() {
-        return perfisAcesso;
+        return Collections.unmodifiableSet(perfisAcesso);
     }
 
     public int getId_Usuario(){
@@ -66,7 +67,7 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
-        if (validaNome(nome)) {
+        if (Validacoes.validaString(nome)) {
             this.nome = nome;
         } else {
             throw new IllegalArgumentException("Nome inválido");
@@ -74,7 +75,7 @@ public class Usuario {
     }
 
     public void setCpf(String cpf) {
-        if (ValidaCPFeCNPJ.validarCPF(cpf)) {
+        if (Validacoes.validarCPF(cpf)) {
             this.cpf = cpf;
         } else {
             throw new IllegalArgumentException("CPF inválido");
@@ -95,10 +96,6 @@ public class Usuario {
         } else {
             throw new IllegalArgumentException("Senha inválida");
         }
-    }
-
-    private boolean validaNome(String nome) {
-        return !nome.isEmpty() && !nome.isBlank() && nome != null;
     }
 
     private boolean validaEmail(String email) {
