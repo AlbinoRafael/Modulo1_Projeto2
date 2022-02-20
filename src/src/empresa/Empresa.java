@@ -25,15 +25,20 @@ public class Empresa {
 
     public Empresa(String nome, String nomeFilial, String cnpj, String cidade, String estado, EnumRegional regional, boolean eMatriz, EnumSegmento segmento) {
         this.id_Empresa = cont_id;
-
-        if (Validacoes.validaString(nome)) {
-            if (eMatriz) {
+        if (eMatriz) {
+            if (Validacoes.validaString(nome)) {
                 this.nome = nome;
+                this.nomeFilial = "";
             } else {
-                this.nomeFilial = nomeFilial;
+                throw new IllegalArgumentException("Nome inválido");
             }
         } else {
-            throw new IllegalArgumentException("Nome inválido");
+            if (Validacoes.validaString(nomeFilial)) {
+                this.nomeFilial = nomeFilial;
+                this.nome = "";
+            } else {
+                throw new IllegalArgumentException("Nome da filial inválido");
+            }
         }
         if (Validacoes.validarCNPJ(cnpj)) {
             this.cnpj = cnpj;

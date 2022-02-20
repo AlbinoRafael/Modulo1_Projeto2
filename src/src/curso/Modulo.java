@@ -3,6 +3,7 @@ package curso;
 import curso.enumscurso.EnumStatus;
 import utils.Validacoes;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
@@ -90,7 +91,14 @@ public class Modulo {
 
     public void setPrazoLimite(int prazoLimite) {
         if (this.dataInicio != null) {
-            this.prazoLimite = this.dataInicio.plusDays(this.diasPrazoLimite);
+            int cont = 0;
+            for (int i = 0; i < prazoLimite; i++) {
+                if (this.dataInicio.plusDays(i).getDayOfWeek().equals(DayOfWeek.SATURDAY)
+                        || this.dataInicio.plusDays(i).getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+                    cont++;
+                }
+            }
+            this.prazoLimite = this.dataInicio.plusDays(prazoLimite + cont);
         } else {
             throw new IllegalArgumentException("Prazo inválido!");
         }
@@ -111,7 +119,8 @@ public class Modulo {
     public void setAnotacao(Anotacao anotacao) {
         this.anotacao = anotacao;
     }
-    public void disponibilizaAvaliacao(){
+
+    public void disponibilizaAvaliacao() {
         this.avaliacaoDisponivel = this.status.equals(EnumStatus.AVALIANDO);
     }
 }

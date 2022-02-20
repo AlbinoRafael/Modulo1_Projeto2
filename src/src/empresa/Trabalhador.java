@@ -15,10 +15,6 @@ public class Trabalhador {
     private static int cont_id = 1;
 
     private List<Trilha> trilhas = new ArrayList<>();
-    private List<Modulo>modulos = new ArrayList<>();
-    private List<Avaliacao>avaliacoes = new ArrayList<>();
-    private List<Anotacao>anotacoes = new ArrayList<>();
-
     private int id_Trabalhador;
     private String nome;
     private String cpf;
@@ -41,18 +37,6 @@ public class Trabalhador {
 
     public List<Trilha> getTrilhas() {
         return Collections.unmodifiableList(trilhas);
-    }
-
-    public List<Modulo> getModulos() {
-        return modulos;
-    }
-
-    public List<Avaliacao> getAvaliacoes() {
-        return avaliacoes;
-    }
-
-    public List<Anotacao> getAnotacoes() {
-        return anotacoes;
     }
 
     public int getId_Trabalhador(){
