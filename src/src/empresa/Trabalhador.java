@@ -1,8 +1,5 @@
 package empresa;
 
-import curso.Anotacao;
-import curso.Avaliacao;
-import curso.Modulo;
 import curso.Trilha;
 import utils.Validacoes;
 

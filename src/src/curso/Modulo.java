@@ -17,7 +17,6 @@ public class Modulo {
     private String tarefaValidacao;
     private OffsetDateTime dataInicio;
     private OffsetDateTime dataFim;
-    private int diasPrazoLimite;
     private OffsetDateTime prazoLimite;
     private EnumStatus status;
     private boolean avaliacaoDisponivel;
@@ -37,7 +36,7 @@ public class Modulo {
             this.tarefaValidacao = tarefaValidacao;
         }
         if (prazoLimite >= 10) {
-            this.diasPrazoLimite = prazoLimite;
+            setPrazoLimite(prazoLimite);
         } else {
             throw new IllegalArgumentException("Prazo inválido");
         }
